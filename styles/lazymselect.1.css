@@ -1,0 +1,63 @@
+﻿.lazymselect-suggestions {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    background: #FFF;
+    cursor: default;
+    overflow: auto;
+    -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    position: absolute;
+    display: none;
+}
+
+.lazymselect-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.lazymselect-suggestion-disable {
+    opacity: 0.4;
+    cursor:not-allowed;
+}
+
+.lazymselect-suggestion-same {
+    font-weight:bold;
+}
+
+.lazymselect-no-suggestion {
+    padding: 2px 5px;
+}
+
+.lazymselect-selected {
+    background: #b4b1b1;
+}
+
+.lazymselect-over {
+    background: #dcd6d6;
+}
+
+.lazymselect-suggestions strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.lazymselect-group {
+    padding: 2px 5px;
+}
+
+.lazymselect-group strong {
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+    display: block;
+    border-bottom: 1px solid #000;
+}
+.lazymselect-loading-suggestion {
+    background-image: url(/Sources/images/load.gif);
+    background-repeat: no-repeat;
+}

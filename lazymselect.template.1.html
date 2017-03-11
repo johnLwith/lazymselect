@@ -1,0 +1,23 @@
+<div class="lazymselect-query">
+    <input type="text" placeholder="Typing to search..."
+    data-bind="value: data.queryString, valueUpdate: 'keyup'" />
+</div>
+<!--ko foreach: data.selectedItems-->
+<div class="lazymselect-suggestion" data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true)">
+    <input type="checkbox" 
+        data-bind="checked: isChecked, event:{ change: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true) }"  />
+    <label data-bind="
+        text: name, 
+        attr: {'title': name}"></label>
+</div>
+<!--/ko -->
+<!--ko foreach: data.unSelectedItems-->
+<div class="lazymselect-suggestion"
+     data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/false)">
+    <input type="checkbox"
+        data-bind="checked: isChecked, event:{ change: $parent.changeChecked.bind($parent, $data, /*fromSelected*/false) }"  />
+    <label data-bind="
+        text: name, 
+        attr: {'title': name}"></label>
+</div>
+<!--/ko -->
