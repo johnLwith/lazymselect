@@ -6,10 +6,10 @@ ul, li{
     margin:0;
     padding:0;
 }
-.lazymselect-query{
+.cy-select-query{
     margin-bottom:10px;
 }
-.lazymselect-suggestions {
+.cy-select-suggestions {
     width:100%;
     padding:10px;
     border: 1px solid #ddd;
@@ -24,62 +24,53 @@ ul, li{
     box-sizing:border-box;
     z-index:10;
 }
-.lazymselect-suggestion-list{
+.cy-select-suggestion-list{
     max-height:350px;
     overflow-y:auto;
 }
-.lazymselect-suggestion {
+.cy-select-suggestion {
     padding: 5px;
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
 }
-.lazymselect-suggestion:hover{
+.cy-select-suggestion:hover{
     background:#eee;
 }
-
-.lazymselect-suggestion-disable {
+.cy-select-suggestion-disable {
     opacity: 0.4;
     cursor:not-allowed;
 }
-
-.lazymselect-suggestion-same {
+.cy-select-suggestion-same {
     font-weight:bold;
 }
-
-.lazymselect-no-suggestion {
+.cy-select-no-suggestion {
     padding: 2px 5px;
 }
-
-.lazymselect-selected {
+.cy-select-selected {
     background: #b4b1b1;
 }
-
-.lazymselect-over {
+.cy-select-over {
     background: #dcd6d6;
 }
-
-.lazymselect-suggestions strong {
+.cy-select-suggestions strong {
     font-weight: bold;
     color: #000;
 }
-
-.lazymselect-group {
+.cy-select-group {
     padding: 2px 5px;
 }
-
-.lazymselect-group strong {
+.cy-select-group strong {
     font-weight: bold;
     font-size: 16px;
     color: #000;
     display: block;
     border-bottom: 1px solid #000;
 }
-.lazymselect-loading-suggestion {
+.cy-select-loading-suggestion {
     background-image: url(/Sources/images/load.gif);
     background-repeat: no-repeat;
 }
-
 /**----**/
 .cy-multiselect-group{
     position:relative;
@@ -120,11 +111,6 @@ ul, li{
     visibility:visible;
     padding-top:3px;
     color:#f44336;
-}
-
-/**cy-multiselect-container**/
-.cy-multiselect-container{
-    
 }
 .cy-input-group{
     position:relative;
@@ -178,4 +164,26 @@ ul, li{
     position:absolute;
     top:13px;
     right:8px;
+}
+.cy-input-selected{
+    padding-top:10px;
+    border-top:1px solid #eee;
+}
+.cy-select-query .cy-input-selected{
+    border-top:0;
+    display:inline-block;
+}
+.cy-input-selected span{
+    display:inline-block;
+    padding:0 5px;
+    color:#aaa;
+}
+.cy-input-selected a{
+    font-size: 12px;
+    color: #ff0000;
+    opacity: .5;
+    padding-left: 5px;
+}
+.cy-input-selected span:hover a, .cy-input-selected span:hover a:hover{
+    opacity:1;
 }

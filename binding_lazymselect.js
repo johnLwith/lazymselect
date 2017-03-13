@@ -29,7 +29,8 @@ var LazyMSelect = (function () {
         this.isRendered = false;
         this.latestQueryUrl = null;
         options.selector = options.selector || {
-            queryInput: '.cy-multiselect-search'
+            queryInput: '.cy-multiselect-search',
+            containerClass: 'cy-select-suggestions'
         };
         this.$element = $(options.element);
         LazyMSelectUtil.debug = options.debug || false;
@@ -162,29 +163,27 @@ var LazyMSelect = (function () {
         var ready = $.Deferred();
         function initContainerEvents() {
             LazyMSelectUtil.log('initContainerEvents');
+            var trigerEventSourceFromKey = 'trigerEventSourceFromKey';
             self.$container.click(function (e) {
-                LazyMSelectUtil.log('$container click stopPropagation', e);
-                // prevent hide container
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
+                e.target[trigerEventSourceFromKey] = self.$container;
+                LazyMSelectUtil.log('$container click stopPropagation', e.target[trigerEventSourceFromKey]);
             });
             self.$element.click(function (e) {
-                LazyMSelectUtil.log('$element click stopPropagation', e);
-                // prevent hide container
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
+                e.target[trigerEventSourceFromKey] = self.$container;
+                LazyMSelectUtil.log('$element click stopPropagation', e.target[trigerEventSourceFromKey]);
             });
             $(document).click(function (e) {
-                LazyMSelectUtil.log('document click');
-                self.hideContainer();
+                LazyMSelectUtil.log('document click', e.target[trigerEventSourceFromKey]);
+                // For prevent hide container
+                if (e.target[trigerEventSourceFromKey] !== self.$container) {
+                    self.hideContainer();
+                }
             });
         }
         if (self.$container == null) {
             $.get(self.options.templateHtmlUrl).then(function (rawHtml) {
                 var div = document.createElement('div');
-                div.setAttribute('class', 'lazymselect-suggestions');
+                div.setAttribute('class', self.options.selector.containerClass);
                 div.innerHTML = rawHtml;
                 self.$element.after(div);
                 self.$container = $(div);

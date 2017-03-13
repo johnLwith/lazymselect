@@ -1,25 +1,25 @@
 <div class="cy-select-query">
     <div class="cy-input-group">
         <span class="cy-input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        <input class="cy-multiselect-search" type="text" placeholder="Search" 
-            data-bind="value: data.queryString, valueUpdate: 'keyup'" />
+        <input class="cy-multiselect-search" type="text" placeholder="Search" data-bind="value: data.queryString, valueUpdate: 'keyup'"
+        />
         <span class="cy-input-group-addon cy-input-group-btn" data-bind="click: clearQueryString.bind($data)">
             <i class="glyphicon glyphicon-remove-circle"></i>
         </span>
     </div>
 
+    <!--ko foreach: data.selectedItems-->
+    <div class="cy-input-selected">
+        <span>
+           <!--ko text: name--><!--/ko-->
+           <a href="close"><i class="glyphicon glyphicon-remove"></i></a>
+        </span>
+    </div>
+    <!--/ko -->
+
 </div>
 
 <div class="cy-select-suggestion-list">
-    <!--ko foreach: data.selectedItems-->
-    <div class="cy-select-suggestion" data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true)">
-        <input type="checkbox" data-bind="checked: isChecked, event:{ change: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true) }"
-        />
-        <label data-bind="
-        text: name, 
-        attr: {'title': name}"></label>
-    </div>
-    <!--/ko -->
     <!--ko foreach: data.unSelectedItems-->
     <div class="cy-select-suggestion" data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/false)">
 
@@ -30,4 +30,4 @@
         attr: {'title': name}"></label>
     </div>
     <!--/ko -->
-</div
+</div>

@@ -40,7 +40,8 @@ class LazyMSelect {
     private $container: JQuery;
     constructor(private options: ILazyMSelectOptions){
        options.selector = options.selector || {
-            queryInput: '.cy-multiselect-search'
+            queryInput: '.cy-multiselect-search',
+            containerClass: 'cy-select-suggestions'
        };
        this.$element = $(options.element);
        LazyMSelectUtil.debug = options.debug || false;
@@ -182,30 +183,28 @@ class LazyMSelect {
 
        function initContainerEvents(){
            LazyMSelectUtil.log('initContainerEvents');
+           const trigerEventSourceFromKey = 'trigerEventSourceFromKey';
            self.$container.click(function(e){
-               LazyMSelectUtil.log('$container click stopPropagation', e);
-               // prevent hide container
-                    e.stopPropagation();
-                    e.preventDefault();
-                    return false;
+               e.target[trigerEventSourceFromKey] = self.$container;
+               LazyMSelectUtil.log('$container click stopPropagation', e.target[trigerEventSourceFromKey]);
            });
            self.$element.click(function(e){
-               LazyMSelectUtil.log('$element click stopPropagation', e);
-               // prevent hide container
-                    e.stopPropagation();
-                    e.preventDefault();
-                    return false;
+               e.target[trigerEventSourceFromKey] = self.$container;
+               LazyMSelectUtil.log('$element click stopPropagation', e.target[trigerEventSourceFromKey]);
            });
            $(document).click(function(e){
-               LazyMSelectUtil.log('document click');
-               self.hideContainer();
+               LazyMSelectUtil.log('document click', e.target[trigerEventSourceFromKey]);
+               // For prevent hide container
+               if(e.target[trigerEventSourceFromKey] !== self.$container){
+                    self.hideContainer();
+               }
            });
        }
 
        if(self.$container == null){
             $.get(self.options.templateHtmlUrl).then((rawHtml)=>{
                     let div = document.createElement('div');
-                    div.setAttribute('class', 'lazymselect-suggestions');
+                    div.setAttribute('class', self.options.selector.containerClass);
                     div.innerHTML = rawHtml;
                     self.$element.after(div);
                     self.$container = $(div);
@@ -279,6 +278,7 @@ interface ILazyMSelectOptions{
     templateHtmlUrl: string;
     selectedItems: KnockoutObservableArray<ILazyMSelectDataItemViewModel>;
     selector?: {
-        queryInput: string
+        queryInput: string,
+        containerClass: string
     }
 }
