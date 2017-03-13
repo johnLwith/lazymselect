@@ -39,6 +39,9 @@ class LazyMSelect {
     private $element: JQuery;
     private $container: JQuery;
     constructor(private options: ILazyMSelectOptions){
+       options.selector = options.selector || {
+            queryInput: '.cy-multiselect-search'
+       };
        this.$element = $(options.element);
        LazyMSelectUtil.debug = options.debug || false;
        this.updateDisplayElementLabel();
@@ -117,6 +120,7 @@ class LazyMSelect {
     public onQueryChanged(queryOptions: ILazySelectQueryChangeOptions){
         LazyMSelectUtil.log('onQueryParamsChanged', queryOptions);
         let self = this;
+        // after container render
         if(self.data){
             self.options.queryUrl = queryOptions.queryUrl;
             self.options.queryParams = queryOptions.queryParams;
@@ -179,16 +183,18 @@ class LazyMSelect {
        function initContainerEvents(){
            LazyMSelectUtil.log('initContainerEvents');
            self.$container.click(function(e){
-               LazyMSelectUtil.log('$container click stopPropagation');
-               e.stopPropagation();
-               e.preventDefault();
-               return false;
+               LazyMSelectUtil.log('$container click stopPropagation', e);
+               // prevent hide container
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
            });
            self.$element.click(function(e){
-               LazyMSelectUtil.log('$element click stopPropagation');
-               e.stopPropagation();
-               e.preventDefault();
-               return false;
+               LazyMSelectUtil.log('$element click stopPropagation', e);
+               // prevent hide container
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
            });
            $(document).click(function(e){
                LazyMSelectUtil.log('document click');
@@ -216,6 +222,7 @@ class LazyMSelect {
     private showContainer(){
         let self = this;
         self.$container.show();
+        self.$container.find(self.options.selector.queryInput).focus();
     }
 
     private hideContainer(){
@@ -271,4 +278,7 @@ interface ILazyMSelectOptions{
     queryParams: Object;
     templateHtmlUrl: string;
     selectedItems: KnockoutObservableArray<ILazyMSelectDataItemViewModel>;
+    selector?: {
+        queryInput: string
+    }
 }

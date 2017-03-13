@@ -1,32 +1,33 @@
 <div class="lazymselect-query">
     <div class="cy-input-group">
         <span class="cy-input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        <input class="cy-multiselect-search" type="text" placeholder="Typing to search..."
-               data-bind="value: data.queryString, valueUpdate: 'keyup'" />
-        <span class="cy-input-group-addon cy-input-group-btn"
-              data-bind="click: clearQueryString.bind($data)">
+        <input class="cy-multiselect-search" type="text" placeholder="Search" 
+            data-bind="value: data.queryString, valueUpdate: 'keyup'" />
+        <span class="cy-input-group-addon cy-input-group-btn" data-bind="click: clearQueryString.bind($data)">
             <i class="glyphicon glyphicon-remove-circle"></i>
         </span>
     </div>
-    
+
 </div>
-<!--ko foreach: data.selectedItems-->
-<div class="lazymselect-suggestion" data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true)">
-    <input type="checkbox" 
-        data-bind="checked: isChecked, event:{ change: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true) }"  />
-    <label data-bind="
+
+<div class="lazymselect-suggestion-list">
+    <!--ko foreach: data.selectedItems-->
+    <div class="lazymselect-suggestion" data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true)">
+        <input type="checkbox" data-bind="checked: isChecked, event:{ change: $parent.changeChecked.bind($parent, $data, /*fromSelected*/true) }"
+        />
+        <label data-bind="
         text: name, 
         attr: {'title': name}"></label>
-</div>
-<!--/ko -->
-<!--ko foreach: data.unSelectedItems-->
-<div class="lazymselect-suggestion"
-     data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/false)">
-   
-    <input type="checkbox"
-        data-bind="checked: isChecked, event:{ change: $parent.changeChecked.bind($parent, $data, /*fromSelected*/false) }"  />
-    <label data-bind="
+    </div>
+    <!--/ko -->
+    <!--ko foreach: data.unSelectedItems-->
+    <div class="lazymselect-suggestion" data-bind="click: $parent.changeChecked.bind($parent, $data, /*fromSelected*/false)">
+
+        <input type="checkbox" data-bind="checked: isChecked, event:{ change: $parent.changeChecked.bind($parent, $data, /*fromSelected*/false) }"
+        />
+        <label data-bind="
         text: name, 
         attr: {'title': name}"></label>
-</div>
-<!--/ko -->
+    </div>
+    <!--/ko -->
+</div

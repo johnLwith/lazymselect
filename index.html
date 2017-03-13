@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>   
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="styles/lazymselect.css" />
-    <link rel="stylesheet" href="styles/bootstrap.css" />    
-</head> 
+    <link rel="stylesheet" href="styles/bootstrap.css" />
+</head>
+
 <body>
     <br/>
     <br/>
@@ -16,11 +18,21 @@
     <br/>
 
     <div id="app">
-        <div class="cy-multiselect" 
-            data-bind="lazymselect:{queryUrl:'testData/live/queryUrl4.json',queryParams: { p1: i() },selectedItems: selectedItems}">
-            <span class="multiselect-selected-text">Select District</span><b class="caret"></b>
+        <div class="cy-multiselect-group">
+            <div class="cy-multiselect" data-bind="lazymselect:{queryUrl:'testData/live/queryUrl4.json',queryParams: { p1: i() },selectedItems: selectedItems4}">
+                <span class="multiselect-selected-text">Select District</span><b class="caret"></b>
+            </div>
         </div>
-
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="cy-multiselect-group">
+        <div class="cy-multiselect" data-bind="lazymselect:{queryUrl:'testData/queryUrl.json',queryParams: { p1: i() },selectedItems: selectedItems}">
+            <span class="multiselect-selected-text">Select District2</span><b class="caret"></b>
+        </div>
+ </div>
         <!--<div data-bind="
             lazymselect:{ queryUrl:'testData/live/queryUrl4.json', selectedItems: selectedItems}">
             A
@@ -33,22 +45,23 @@
     <br/>
     <br/>
     <br/>
-    
+
     <script src="lib/jquery-1.11.1.min.js"></script>
     <script src="lib/lodash.js"></script>
     <script src="lib/knockout-3.4.0.debug.js"></script>
     <script src="binding_lazymselect.js"></script>
     <script>
         var viewModel = {
+            selectedItems4: ko.observableArray(),
             selectedItems: ko.observableArray(),
             i: ko.observable(2)
         }
-        viewModel.selectedItems.push({id:'Ali5690'});
+        viewModel.selectedItems4.push({ id: 'Ali5690' });
         ko.applyBindings(viewModel, document.getElementById('app'));
-        setInterval(function(){
+        setInterval(function () {
             // console.log('setTimeout for queryParams');
             // //viewModel.queryParams({ i: queryParams.i++ });
-            
+
             // let currentI = viewModel.i();
             //  if(currentI< 4){
             //     viewModel.i(currentI+1);
@@ -58,4 +71,5 @@
         }, 8000);
     </script>
 </body>
+
 </html>

@@ -28,6 +28,9 @@ var LazyMSelect = (function () {
         this.options = options;
         this.isRendered = false;
         this.latestQueryUrl = null;
+        options.selector = options.selector || {
+            queryInput: '.cy-multiselect-search'
+        };
         this.$element = $(options.element);
         LazyMSelectUtil.debug = options.debug || false;
         this.updateDisplayElementLabel();
@@ -100,6 +103,7 @@ var LazyMSelect = (function () {
     LazyMSelect.prototype.onQueryChanged = function (queryOptions) {
         LazyMSelectUtil.log('onQueryParamsChanged', queryOptions);
         var self = this;
+        // after container render
         if (self.data) {
             self.options.queryUrl = queryOptions.queryUrl;
             self.options.queryParams = queryOptions.queryParams;
@@ -159,13 +163,15 @@ var LazyMSelect = (function () {
         function initContainerEvents() {
             LazyMSelectUtil.log('initContainerEvents');
             self.$container.click(function (e) {
-                LazyMSelectUtil.log('$container click stopPropagation');
+                LazyMSelectUtil.log('$container click stopPropagation', e);
+                // prevent hide container
                 e.stopPropagation();
                 e.preventDefault();
                 return false;
             });
             self.$element.click(function (e) {
-                LazyMSelectUtil.log('$element click stopPropagation');
+                LazyMSelectUtil.log('$element click stopPropagation', e);
+                // prevent hide container
                 e.stopPropagation();
                 e.preventDefault();
                 return false;
@@ -194,6 +200,7 @@ var LazyMSelect = (function () {
     LazyMSelect.prototype.showContainer = function () {
         var self = this;
         self.$container.show();
+        self.$container.find(self.options.selector.queryInput).focus();
     };
     LazyMSelect.prototype.hideContainer = function () {
         var self = this;
